@@ -63,7 +63,7 @@ namespace Proyecto_3
 
             while (aux != null)
             {
-                if (aux.NodoActual.DatoNIT() == NIT )
+                if (aux.NodoActual.DatoNIT() == NIT)
                 {
                     return aux.NodoActual;
                 }
@@ -74,5 +74,19 @@ namespace Proyecto_3
             return default;
         }
 
+        public List<Contribuyente> RecorrerRTU()
+        {
+            List<Contribuyente> lista = new List<contribuyente>();
+            MostrarInfo(raiz, lista);
+            return lista;
+        }
+
+        private void MostrarInfo(NodoRTU aux, Lista<Contribuyente> lista)
+        {
+            if (aux == null) return;
+            MostrarInfo(aux.NodoIzquierda);
+            lista.Add(aux.NodoActual);
+            MostrarInfo(aux.NodoDerecha);
+        }
     }
 }
