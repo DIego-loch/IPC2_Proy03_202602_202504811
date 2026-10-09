@@ -6,13 +6,13 @@ namespace Proyecto_3
     {
         public NodoRTU? raiz { get; set; }
 
-        public void NuevoContribuyente(Contribuyente dato)
+        public bool NuevoContribuyente(Contribuyente dato)
         {
             NodoRTU nodo = new NodoRTU(dato);
             if (raiz == null)
             {
                 raiz = nodo;
-                return;
+                return true;
             }
 
 
@@ -22,18 +22,56 @@ namespace Proyecto_3
             {
                 if (nodo.NodoActual.DatoNIT() > aux.NodoActual.DatoNIT())
                 {
-                    if (aux.NodoDerecha == null) { aux.NodoDerecha = nodo; return; }
+                    if (aux.NodoDerecha == null) { aux.NodoDerecha = nodo; return true; }
                     else aux = aux.NodoDerecha;
 
                 }
                 else if (nodo.NodoActual.DatoNIT() < aux.NodoActual.DatoNIT())
                 {
-                    if (aux.NodoIzquierda == null) { aux.NodoIzquierda = nodo; return; }
+                    if (aux.NodoIzquierda == null) { aux.NodoIzquierda = nodo; return true; }
                     else aux = aux.NodoIzquierda;
                 }
-                else return;
+                else return false;
             }
 
+        }
+
+        public bool ActualizarContribuyente(string NITContri, string NuevoNombre)
+        {
+            long NIT = long.Parse(NITContri);
+            NodoRTU aux = raiz;
+
+            while (aux != null)
+            {
+                if (aux.NodoActual.DatoNIT() == NIT)
+                {
+                    aux.NodoActual.nombre = NuevoNombre;
+                    return true;
+                }
+                else if (NIT > aux.NodoActual.DatoNIT()) aux = aux.NodoDerecha;
+                else aux = aux.NodoIzquierda;
+            }
+
+            return false;
+        }
+
+        public Contribuyente? MostrarContribuyente(string NITContri)
+        {
+
+            long NIT = long.Parse(NITContri);
+            NodoRTU aux = raiz;
+
+            while (aux != null)
+            {
+                if (aux.NodoActual.DatoNIT() == NIT )
+                {
+                    return aux.NodoActual;
+                }
+                else if (NIT > aux.NodoActual.DatoNIT()) aux = aux.NodoDerecha;
+                else aux = aux.NodoIzquierda;
+            }
+
+            return default;
         }
 
     }

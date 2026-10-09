@@ -15,7 +15,7 @@ namespace Proyecto_3
 
         public long DatoNIT()
         {
-            return long.TryParse(this.NIT);
+            return long.Parse(this.NIT);
         }
     }
 }
