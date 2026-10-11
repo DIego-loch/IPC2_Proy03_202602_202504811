@@ -2,7 +2,7 @@ using System;
 
 namespace Proyecto_3
 {
-    class NodoRTU
+   public class NodoRTU
     {
         public Contribuyente NodoActual { get; set; }
         public NodoRTU? NodoDerecha { get; set; }

@@ -6,6 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSingleton<ArbolRTU>();
+builder.Services.AddSingleton<Guardar>();
+builder.Services.AddSingleton<Cargar>();
 
 var app = builder.Build();
 

@@ -8,8 +8,7 @@ namespace Proyecto_3
 
     public class Guardar
     {
-        public ArbolRTU? Serealizacion { get; set; }
-
+        private readonly ArbolRTU Serealizacion;
         public Guardar(ArbolRTU serealizacion)
         {
             Serealizacion = serealizacion;
@@ -25,7 +24,6 @@ namespace Proyecto_3
             string JSON = JsonSerializer.Serialize(ObtenerRecorrido());
             File.WriteAllText("Datos/InfoRTU.json", JSON);
         }
-
 
     }
 }

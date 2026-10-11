@@ -1,5 +1,5 @@
 using System;
-using Proyecto_2;
+using Proyecto_3;
 namespace Proyecto_3
 {
     public class ArbolRTU
@@ -57,7 +57,6 @@ namespace Proyecto_3
 
         public Contribuyente? MostrarContribuyente(string NITContri)
         {
-
             long NIT = long.Parse(NITContri);
             NodoRTU aux = raiz;
 
@@ -76,17 +75,17 @@ namespace Proyecto_3
 
         public List<Contribuyente> RecorrerRTU()
         {
-            List<Contribuyente> lista = new List<contribuyente>();
+            List<Contribuyente> lista = new List<Contribuyente>();
             MostrarInfo(raiz, lista);
             return lista;
         }
 
-        private void MostrarInfo(NodoRTU aux, Lista<Contribuyente> lista)
+        private void MostrarInfo(NodoRTU aux, List<Contribuyente> lista)
         {
             if (aux == null) return;
-            MostrarInfo(aux.NodoIzquierda);
+            MostrarInfo(aux.NodoIzquierda, lista);
             lista.Add(aux.NodoActual);
-            MostrarInfo(aux.NodoDerecha);
+            MostrarInfo(aux.NodoDerecha, lista);
         }
     }
 }
