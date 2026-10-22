@@ -18,6 +18,7 @@ namespace Proyecto_3
             guardado = guardados;
         }
 
+// Metodo de procesar en donde se ingresa el JSON
         [HttpPost("Procesar")]
         public IActionResult Procesar([FromBody]List<Contribuyente> ListaContribuyentes)
         {

@@ -70,7 +70,7 @@ namespace Proyecto_3
                 else aux = aux.NodoIzquierda;
             }
 
-            return default;
+            return null;
         }
 
         public List<Contribuyente> RecorrerRTU()
