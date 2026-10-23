@@ -39,12 +39,13 @@ namespace Proyecto_3
                 {
                     //Creamos el codigo de autorizacio
                     GeneradorCodigo cod = new GeneradorCodigo();
-                    long CodigoAutorizado = cod.CodigoAutorizacion();
+                    long CodigoAutorizado = cod.CodigoAutorizacion(dTEs.Tiempo);
 
                     // Guardamos la referencia de la factura
                     // y el codigo que le corresponde por su autorizacion
                     CodReferencias dato = new CodReferencias(dTEs.Referencia, CodigoAutorizado);
                     listaCodReferencias.dato.Add(dato);
+
                     IngresoFacturasAprobadas IngresoFacturas = new IngresoFacturasAprobadas(listaDTE, dTEs);
                     IngresoFacturas.MetodoIngreso();
                     FacAprobados++;
