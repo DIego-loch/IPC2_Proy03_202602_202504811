@@ -18,9 +18,9 @@ namespace Proyecto_3
             guardado = guardados;
         }
 
-// Metodo de procesar en donde se ingresa el JSON
+        // Metodo de procesar en donde se ingresa el JSON
         [HttpPost("Procesar")]
-        public IActionResult Procesar([FromBody]List<Contribuyente> ListaContribuyentes)
+        public IActionResult Procesar([FromBody] List<Contribuyente> ListaContribuyentes)
         {
             int contadorActualizados = 0, contadorNuevos = 0, contadorRechazados = 0;
             foreach (Contribuyente list in ListaContribuyentes)
@@ -38,18 +38,21 @@ namespace Proyecto_3
                         Arbol.NuevoContribuyente(list);
                         contadorNuevos++;
                     }
-                } else
+                }
+                else
                 {
                     contadorRechazados++;
                 }
             }
             guardado.GuardarEnJSON();
-            Respuesta r = new Respuesta{
+            Respuesta r = new Respuesta
+            {
                 CONTRIBUYENTES_ACTUALIZADOS = contadorActualizados,
                 CONTRIBUYENTES_NUEVOS = contadorNuevos,
-                NITS_INVALIDOS =  contadorRechazados
-             };
+                NITS_INVALIDOS = contadorRechazados
+            };
             return Ok(r);
         }
+
     }
 }

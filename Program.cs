@@ -2,6 +2,7 @@ using Proyecto_3;
 using System.Text.Json;
 using System.IO;
 using System.Collections.Generic;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Servicios
@@ -15,9 +16,18 @@ builder.Services.AddSingleton<Cargar>();
 builder.Services.AddSingleton<GuardarFacturas>();
 builder.Services.AddSingleton<CargarFacturas>();
 
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("PermitirTodo", policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
-// AQUÍ ESTÁ EL BLOQUE CORRECTO (Cargar el RTU al arrancar)
+// Cargar datos al arrancar
 using (var scope = app.Services.CreateScope())
 {
     var arbol = scope.ServiceProvider.GetRequiredService<ArbolRTU>();
@@ -27,6 +37,7 @@ using (var scope = app.Services.CreateScope())
 
     var ListaIngresoDTE = CargarFactura.Deserealizar();
     var contribuyentesGuardados = cargador.CargarJSON();
+
     foreach (var c in contribuyentesGuardados)
     {
         arbol.NuevoContribuyente(c);
@@ -44,6 +55,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseCors("PermitirTodo");
 app.UseHttpsRedirection();
 app.MapControllers();
 
