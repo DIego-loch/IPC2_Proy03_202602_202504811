@@ -19,6 +19,7 @@ namespace Proyecto_3
         public void SerealizarLista()
         {
             string ArchivoPersistente = JsonSerializer.Serialize(ArchivoSerealizar.DTEs);
+            Directory.CreateDirectory("Datos");
             File.WriteAllText("Datos/InfoDTE.json", ArchivoPersistente);
         }
     }

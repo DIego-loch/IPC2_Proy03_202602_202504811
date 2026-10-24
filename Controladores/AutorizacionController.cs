@@ -144,6 +144,24 @@ namespace Proyecto_3
             return Ok(new { mensaje = "Sistema reiniciado correctamente." });
         }
 
+        [HttpGet("DatosGrafica")]
+        public IActionResult DatosGrafica()
+        {
+            var totalesPorFecha = new Dictionary<string, decimal>();
+
+            foreach (var dte in listaDTE.DTEs)
+            {
+                string[] partes = dte.Tiempo.Split(' ');
+                string fecha = partes[1];
+
+                if (totalesPorFecha.ContainsKey(fecha))
+                    totalesPorFecha[fecha] += (decimal)dte.Total;
+                else
+                    totalesPorFecha[fecha] = (decimal)dte.Total;
+            }
+            return Ok(totalesPorFecha);
+        }
+
     }
 
 }

@@ -21,7 +21,9 @@ namespace Proyecto_3
 
         public void GuardarEnJSON()
         {
+
             string JSON = JsonSerializer.Serialize(ObtenerRecorrido());
+            Directory.CreateDirectory("Datos");
             File.WriteAllText("Datos/InfoRTU.json", JSON);
         }
 
